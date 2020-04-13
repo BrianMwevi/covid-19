@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block body_block %}
+	<section class="home-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-5 rounded form temp-margin mx-auto">
+					<!-- LOG IN FORM -->
+					<div id="login" class="form-side shadow gradient p-5 {% if is_user %}
+						form-side--front
+						{% else %}
+							form-side--back
+						{% endif %}">
+						<h4 class="text-center">Log In</h4>				
+						<form id="loginForm" action="{% url 'accounts:register' %}" method="POST">{% csrf_token %}
+						{% bootstrap_form login_form %}
+						{% if form.errors %}
+							<h1>Login form errors</h1>
+						{% endif %}
+						<div class="text-center">
+							<button class="btn btn-custom" type="submit">Log in</button>
+						</div>
+						</form>
+						<div class="text-center pt-2">
+						    <p><a href="#" class="card-link form-link text-dark"><strong>Forgot password?</strong></a><br><br> Don't have an account?&nbsp;<label class="form-link" onclick="rotateSignup()"><strong>Sign up</strong></label></p>
+							<p class="shadow mt-4 text-white">Made with <i class="fa fa-heart text-danger"></i> by <strong>Brian Mwevi</strong><br>
+								<a href="https://github.com/BrianMwevi/writer" target="_blank" class="btn btn-md btn-custom text-dark">View on GitHub <i class="fa fa-external-link"></i></a>
+							</p>
+						</div>
+					</div>
+					<!-- SINGUP FORM -->
+					<div id="signup" class="form-side shadow {% if is_user %}
+						form-side--back
+						{% else %}
+							form-side--front
+						{% endif %} gradient p-5">
+						<h4 class="text-center">Sign Up</h4>				
+						<form id="signupForm" action="{% url 'accounts:register' %}" method="POST">{% csrf_token %}
+							{% bootstrap_form signup_form %}
+							<div class="text-center">
+								<button class="btn btn-custom" type="submit">Sign up</button>
+							</div>
+						</form>
+						<div class="text-center">
+						    <p>You have an account?&nbsp;<label class="form-link" onclick="rotateLogin()"><strong>Log in</strong></label></p>
+							<p class="shadow text-white">Made with <i class="fa fa-heart text-danger"></i> by <strong>Brian Mwevi</strong><br>
+								<a href="https://github.com/BrianMwevi/writer" target="_blank" class="btn btn-md btn-custom text-dark">View on GitHub <i class="fa fa-external-link"></i></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+	</section>
+{% endblock body_block %}
